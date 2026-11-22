@@ -73,6 +73,14 @@ import com.newtube.mobile.ui.webbrowser.MobileWebBrowserActivity;
  * runs.
  */
 public class MobileMainApplication extends MainApplication {
+    // Vietnamese-first build: force the app resource locale to Vietnamese, independent of device locale.
+    @Override
+    protected void attachBaseContext(Context base) {
+        android.content.res.Configuration config = new android.content.res.Configuration(base.getResources().getConfiguration());
+        config.setLocale(java.util.Locale.forLanguageTag("vi-VN"));
+        super.attachBaseContext(base.createConfigurationContext(config));
+    }
+
     /** BotGuard warmup for a process whose first Activity never draws (see onCreate). */
     private static final long TOKEN_WARMUP_FALLBACK_MS = 4_000;
     /** Held here: AppPrefs keeps its profile listeners weakly. */
